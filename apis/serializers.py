@@ -1,23 +1,54 @@
 from rest_framework import serializers
-from apis.models import Apis,Forehand,Backhand
+from apis.models import Backhand, Forehand
+import json
+import numpy as np
+from scipy.signal import find_peaks
 
+class ForehandSerializer(serializers.ModelSerializer):
 
-class ApisSerializer(serializers.Serializer):
     class Meta:
-        model = Apis
-        fields = ['id', 'title', 'data']
+        fields = [
+            'id',
+            'hits',
+            'over',
+            'under',
+            'good',
+        ]
+        model = Forehand
 
-    def create(self, validated_data):
-        """
-        Create and return a new `Apis` instance, given the validated data.
-        """
-        return Apis.objects.create(**validated_data)
+        def create(self, validated_data):
 
-    def update(self, instance, validated_data):
-        """
-        Update and return an existing `Apis` instance, given the validated data.
-        """
-        instance.title = validated_data.get('title', instance.title)
-        instance.data = validated_data.get('data', instance.data)
-        instance.save()
-        return instance
+            return Forehand.objects.create(**validated_data)
+
+        def update(self, instance, validated_data):
+
+            instance.title = validated_data.get('title', instance.title)
+            instance.data = validated_data.get('data', instance.data)
+            instance.save()
+            return instance
+
+class BackhandSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        fields = (
+            'id',
+            'hits',
+            'over',
+            'under',
+            'good',
+        )
+        model = Backhand
+
+        def create(self, validated_data):
+
+            return Forehand.objects.create(**validated_data)
+
+        def update(self, instance, validated_data):
+
+            instance.title = validated_data.get('title', instance.title)
+            instance.data = validated_data.get('data', instance.data)
+            instance.save()
+            return instance
+
+
+

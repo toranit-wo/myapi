@@ -1,13 +1,23 @@
-from apis.models import Apis
-from apis.serializers import ApisSerializer
+from apis.models import Forehand,Backhand
+from apis.serializers import ForehandSerializer,BackhandSerializer
 from rest_framework import generics
 
 
-class ApisList(generics.ListCreateAPIView):
-    queryset = Apis.objects.all()
-    serializer_class = ApisSerializer
+class ForehandList(generics.ListCreateAPIView):
+    queryset = Forehand.objects.all()
+    serializer_class = ForehandSerializer
 
 
-class ApisDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Apis.objects.all()
-    serializer_class = ApisSerializer
+class ForehandDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Forehand.objects.all()
+    serializer_class = ForehandSerializer
+
+class BackhandList(generics.ListCreateAPIView):
+    queryset = Backhand.objects.all()
+    serializer_class = BackhandSerializer
+
+
+class BackhandDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Backhand.objects.all()
+    serializer_class = BackhandSerializer
+
